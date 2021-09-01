@@ -5,7 +5,7 @@ SELECT *
 FROM portfolio.dbo.NashvilleHousing;
 
 ----------------------------------------------------------------------------------------------------
--- Standarize Date Format
+-- Standardize Date Format
 
 ALTER TABLE NashvilleHousing
 Add SaleDateConverted Date;
@@ -41,7 +41,7 @@ JOIN portfolio.dbo.NashvilleHousing b
 WHERE a.PropertyAddress is NULL;
 
 ------------------------------------------------------------------------------------------------------
--- Breaking out Address into Individual Coulumns (Address, City, State)
+-- Breaking out Address into Individual Columns (Address, City, State)
 
 SELECT PropertyAddress
 FROM portfolio.dbo.NashvilleHousing;
