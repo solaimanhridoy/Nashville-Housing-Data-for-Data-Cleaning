@@ -4,7 +4,7 @@
 SELECT * 
 FROM portfolio.dbo.NashvilleHousing;
 
---------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Standarize Date Format
 
 ALTER TABLE NashvilleHousing
@@ -40,7 +40,7 @@ JOIN portfolio.dbo.NashvilleHousing b
 		AND a.[UniqueID ] <> b.[UniqueID ]
 WHERE a.PropertyAddress is NULL;
 
---------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 -- Breaking out Address into Individual Coulumns (Address, City, State)
 
 SELECT PropertyAddress
@@ -97,7 +97,7 @@ SET OwnerSplitState = PARSENAME(REPLACE(OwnerAddress, ',', '.'), 1);
 SELECT *
 FROM portfolio.dbo.NashvilleHousing;
 
--------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 -- Change Y and N to Yes and No in "Sold as Vacant" field
 
 SELECT DISTINCT(SoldAsVacant), COUNT(SoldAsVacant)
@@ -119,22 +119,22 @@ WHEN SoldAsVacant = 'N' THEN 'No'
 	 ELSE SoldAsVacant
 	 END
 
-----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
 -- Remove Duplicates
 
 -- Show Duplicates
 WITH RowNumCTE AS(
 SELECT *,
-		ROW_NUMBER() OVER (
-		PARTITION BY ParcelID,
-							  PropertyAddress,
-							  SalePrice,
-							  SaleDate,
-							  LegalReference
-							  ORDER BY
-									 UniqueID
-									 ) row_num
+	ROW_NUMBER() OVER (
+	PARTITION BY ParcelID,
+				PropertyAddress,
+				SalePrice,
+				SaleDate,
+				LegalReference
+				ORDER BY
+					UniqueID
+					) row_num
 FROM portfolio.dbo.NashvilleHousing
 )
 
@@ -147,15 +147,15 @@ ORDER BY PropertyAddress;
 
 WITH RowNumCTE AS(
 SELECT *,
-		ROW_NUMBER() OVER (
-		PARTITION BY ParcelID,
-							  PropertyAddress,
-							  SalePrice,
-							  SaleDate,
-							  LegalReference
-							  ORDER BY
-									 UniqueID
-									 ) row_num
+	ROW_NUMBER() OVER (
+	PARTITION BY ParcelID,
+	PropertyAddress,
+	SalePrice,
+	SaleDate,
+	LegalReference
+	ORDER BY
+		UniqueID
+		) row_num
 FROM portfolio.dbo.NashvilleHousing
 )
 
@@ -163,7 +163,7 @@ DELETE
 FROM RowNumCTE
 WHERE row_num > 1
 
-----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
 -- Delete Unused Columns
 
